@@ -1,24 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import Pokemons from './components/Pokemon/Pokemons';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from './components/Themes/GlobalStyles';
+import {useDarkMode} from './components/Hooks/useDarkMode';
+import { darkTheme, lightTheme } from './components/Themes/Themes';
+import Toogle from './components/Themes/Toggler';
+import Navigation from './components/Navigation/Navigation';
+import Footer from './components/Footer/Footer';
+
+const App = () => {
+  const [theme, themeToggler] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={themeMode}>
+      <>
+        <GlobalStyles />
+        <div className="App">
+          <Navigation>
+            <Toogle theme={theme} toggleTheme={themeToggler} />
+          </Navigation>
+          <Pokemons />
+          <Footer />
+        </div>
+      </>
+    </ThemeProvider>
   );
 }
 
