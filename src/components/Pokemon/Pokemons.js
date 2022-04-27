@@ -48,7 +48,8 @@ const Pokemons = () => {
       url: `https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`,
     });
     setMoreDataRequest(true);
-  }, [offset, fetchPokemons]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [offset]);
   const loadMoreDataHandler = () => {
     setOffset((prevState) => {
       return prevState + 20;
